@@ -3,8 +3,15 @@ package oop;
 import java.util.Scanner;
 
 public class VastaseMänguVäli extends mänguVäli {
+    private int mänguväljapikkus;
 
-    public VastaseMänguVäli() {
+    public VastaseMänguVäli() {    
+    }
+    public void setMänguväljapikkus(int mänguväljapikkus) {
+        this.mänguväljapikkus = mänguväljapikkus;
+    }
+    public int getMänguväljapikkus() {
+        return this.mänguväljapikkus;
     }
 
 
@@ -40,12 +47,27 @@ public class VastaseMänguVäli extends mänguVäli {
     // vastavalt sisendile muudetakse isendivälja (st
     // märgitakse mänguväljal ruut kas 'x' või '0' (pihtas, möödas))
     public void pommita(){
-        System.out.println("Vali rida, mida soovid tabada: ");
-        Scanner pommrida = new Scanner(System.in);
-        int rida = pommrida.nextInt();
-        System.out.println("Vali veerg, mida soovid tabada: ");
-        Scanner pommveerg = new Scanner(System.in);
-        int veerg = pommveerg.nextInt();
+        Scanner pomm = new Scanner(System.in);
+        int rida, veerg;
+
+        while (true) {
+            System.out.println("Vali rida, mida soovid tabada: ");
+            rida=pomm.nextInt();
+            if (rida >=0 && rida < getMänguväljapikkus()) {
+                break;
+            } else {
+                System.out.println("Proovi uuesti, sisestasid arvu valesti: " + mänguväljapikkus);
+            }
+        }
+        while (true) {
+            System.out.println("Vali veerg, mida soovid tabada: ");
+            veerg = pomm.nextInt();
+            if (veerg >=0 && veerg < getMänguväljapikkus()) {
+                break;
+            } else {
+                System.out.println("Proovi uuesti, sisestasid arvu valesti: ");
+            }
+        }
 
         if (getMänguväli()[rida][veerg] == 'P'){
             System.out.println("Tabasid päkapikku!");
