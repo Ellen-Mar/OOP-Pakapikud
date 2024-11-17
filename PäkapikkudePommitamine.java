@@ -17,7 +17,6 @@ public class PäkapikkudePommitamine {
         tutvustusTekst();
         char mets = 'M';
         Edetabel info = new Edetabel();
-
         
         //  loome mänguvälja, millel on juures sobiva sisendi kontroll
         while (true) {
