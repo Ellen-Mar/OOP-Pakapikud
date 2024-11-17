@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class mänguVäli {
     private char[][] mänguväli;
     private int päkapikud = 0;
+    private int mänguväljapikkus;
 
     // getter mänguvälja väljale
     public char[][] getMänguväli() {
@@ -30,6 +31,7 @@ public class mänguVäli {
 
     // loob algse tühja (st metsaga täidetud) mänguvälja ja muudab isendivälja
     public void looMänguväli(int mänguväljapikkus, char mets){
+        this.mänguväljapikkus = mänguväljapikkus;
         char[][] mänguLaud = new char[mänguväljapikkus][mänguväljapikkus];
         for (char[] rida : mänguLaud){
             Arrays.fill(rida, mets);
@@ -69,6 +71,26 @@ public class mänguVäli {
             int veerg = ThreadLocalRandom.current().nextInt(0, getMänguväli().length);
             this.mänguväli[rida][veerg] = 'P';
         }
+    }
+    public void valinPäkapikud() {
+        Scanner ise = new Scanner(System.in);
+        int mituTükkiAlles = getPäkapikud();
+        while (mituTükkiAlles >0) {
+            System.out.println("Pead paika panema nii mitu päkapikkus: " + mituTükkiAlles);
+            System.out.println("Vali rida: 0-" + (mänguväli.length-1) + ":");
+            int rida = ise.nextInt();
+            System.out.println("Vali veerg: 0-" + (mänguväli.length-1) + ":");
+            int veerg = ise.nextInt();
+            if (sobivAsukoht(rida,veerg)) {
+                this.mänguväli[rida][veerg] = 'P';
+                mituTükkiAlles--;
+            } else {
+                System.out.println("Ebasobiv asukoht, proovi uuesti");
+            }
+            prindiMänguväli();
+        }
+    }private boolean sobivAsukoht(int rida, int veerg) {
+        return rida >= 0 && rida < mänguväli.length && veerg >= 0 && veerg < mänguväli.length && mänguväli[rida][veerg] =='M';
     }
 
 
